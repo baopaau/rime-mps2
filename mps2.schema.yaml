@@ -4,7 +4,7 @@
 schema:
   schema_id: mps2
   name: 注音二式
-  version: "1.0"
+  version: "1.1"
   author:
     - Baopaau <baopaau@gmail.com>
 
@@ -17,6 +17,11 @@ schema:
     3）ㄦ韻的拼寫改爲「er」（el -> er）
 
     在音節後鍵入V(陰平)、VV(陽平)、X(上)、Q(去)以輸入聲調。
+
+    容許的簡寫法：
+    1）tz/tsz/sz -> z/cz/sz
+    2）jr/chr/shr/r -> jr/cr/sr/r
+    3）ji/chi/shi -> ji/ci/si
 
     未開始輸入前，按V鍵使用反查功能。
 
@@ -118,6 +123,7 @@ speller:
     - derive/^ts/c/
     #- derive/^sh/x/ # 影響聲調輸入
     #- derive/^ch/q/ # 影響聲調輸入
+    - derive/^([sc])h([ir])/$1$2/
 
     # 簡拼
     - abbrev/^([a-z]).+$/$1/
@@ -146,18 +152,18 @@ speller:
     - fuzz/a/s/
     - fuzz/s/a/
 
-    - fuzz/w/e/
-    - fuzz/e/w/
-    - fuzz/i/o/
-    - fuzz/o/i/
-    - fuzz/s/d/
-    - fuzz/d/s/
-    - fuzz/j/k/
-    - fuzz/k/j/
-    - fuzz/z/x/
-    - fuzz/x/z/
-    - fuzz/n/m/
-    - fuzz/m/n/
+    #- fuzz/w/e/
+    #- fuzz/e/w/
+    #- fuzz/i/o/
+    #- fuzz/o/i/
+    #- fuzz/s/d/
+    #- fuzz/d/s/
+    #- fuzz/j/k/
+    #- fuzz/k/j/
+    #- fuzz/z/x/
+    #- fuzz/x/z/
+    #- fuzz/n/m/
+    #- fuzz/m/n/
 
     #- fuzz/x/c/
     #- fuzz/c/x/
@@ -246,12 +252,12 @@ translator:
     - xform u3 ǔ
     - xform u4 ù
     - xform r1 r̄
-    - xform r2 ŕ
-    - xform r3 ř
+    - xform r2 ŕ
+    - xform r3 ř
     - xform r4 r̀
     - xform z1 z̄
-    - xform z2 ź
-    - xform z3 ž
+    - xform z2 ź
+    - xform z3 ž
     - xform z4 z̀
     - xform/eh[0-5]?/ê/
     - xform/([a-z]+)[0-5]/$1/
