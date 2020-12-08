@@ -4,7 +4,7 @@
 schema:
   schema_id: mps2
   name: 注音二式
-  version: "1.1"
+  version: "1.2"
   author:
     - Baopaau <baopaau@gmail.com>
 
@@ -78,12 +78,13 @@ speller:
   delimiter: " '"
   algebra:
     - erase/^xx$/
-    - xform/^r5$/er5/
+    - xform/^r5$/er5/  # 〜兒
+    - xform/^wong4$/weng4/ # 𥥈/𥦷
 
     - derive/[1234]/5/
 
-    # 不分uo/o
-    - derive/^([bpmf])o/$1uo/
+    - derive/^([bpmf])o/$1uo/ # 現代音ㄛ->ㄨㄛ
+    - derive/^([bpmfw])eng/$1ong/ # 讀書音ㄥ->ㄨㄥ(ueng)
     - derive/^([dtnlgkhzcsr]h?)uo/$1o/ # lo(咯)
     
     # 轉譯爲MPS2
@@ -96,34 +97,38 @@ speller:
     - xform/^x/sh/
 
     - xform/^([zcs])i([1-5])$/$1z$2/
-    - xform/^z([aeiouz])/tz$1/
-    - xform/^c([aeiouz])/ts$1/
+    - xform/^([zcs])ii([1-5])$/$1i$2/ # 尖音字碼表用
+    - xform/^z([aeiouvz])/tz$1/
+    - xform/^c([aeiouvz])/ts$1/
     - xform/^tzz([1-5])$/tz$1/
 
     - xform/iu([1-5])$/iou$1/
     - xform/v/iu/
     - xform/ui([1-5])$/uei$1/
     - xform/ao([1-5])$/au$1/
-    - xform/([^y])un([1-5])$/$1uen$2/
+    - xform/([^yi])un([1-5])$/$1uen$2/
     - xform/ong([1-5])$/ung$1/
 
     # 容許混淆
     - derive/uen([1-5])$/un$1/
+    - derive/ung([1-5])$/ueng$1/
     - derive/uei/ui/
     - derive/au/ao/
+    - derive/ua/oa/
     - derive/ung/ong/
     - derive/iu/yu/
 
     # 模糊音
-    - derive/([^iu][iea]n)g([1-5])$/$1$2/ # in<-ing/en<-eng/an<-ang
-    - derive/([^iu][iea]n)([1-5])$/$1g$2/ # in->ing/en->eng/an->ang
+    - fuzz/([^iu][iea]n)g([1-5])$/$1$2/ # in<-ing/en<-eng/an<-ang
+    - fuzz/([^iu][iea]n)([1-5])$/$1g$2/ # in->ing/en->eng/an->ang
 
     # 簡寫
     - derive/^tz/z/
     - derive/^ts/c/
     #- derive/^sh/x/ # 影響聲調輸入
     #- derive/^ch/q/ # 影響聲調輸入
-    - derive/^([sc])h([ir])/$1$2/
+    - derive/^([sc])hr/$1r/
+    #- derive/^([sc])hi/$1i/ # 若使用尖音字碼表，請註釋此行
 
     # 簡拼
     - abbrev/^([a-z]).+$/$1/
@@ -200,7 +205,8 @@ translator:
   spelling_hints: 7
   comment_format: &comment
     # 轉譯爲MPS2
-    - xform/\<r5\>/er5/
+    - xform/\<r5\>/er5/  # 〜兒
+    - xform/\<wong4\>/weng4/ # 𥥈/𥦷
 
     - xform/\<([jqx])u/$1v/
 
@@ -211,15 +217,16 @@ translator:
     - xform/\<x/sh/
 
     - xform/\<([zcs])i([1-5])\>/$1z$2/
-    - xform/\<z([aeiouz])/tz$1/
-    - xform/\<c([aeiouz])/ts$1/
+    - xform/\<([zcs])ii([1-5])\>/$1i$2/ # 尖音字碼表用
+    - xform/\<z([aeiouvz])/tz$1/
+    - xform/\<c([aeiouvz])/ts$1/
     - xform/\<tzz([1-5])\>/tz$1/
 
     - xform/iu([1-5])\>/iou$1/
     - xform/v/iu/
     - xform/ui([1-5])\>/uei$1/
     - xform/ao([1-5])\>/au$1/
-    - xform/([^y])un([1-5])\>/$1uen$2/
+    - xform/([^yi])un([1-5])\>/$1uen$2/
     - xform/ong([1-5])\>/ung$1/
 
     # 正詞法（按需啓用）
@@ -303,7 +310,7 @@ punctuator:
   import_preset: symbols
 
 key_binder:
-  import_preset: default
+  import_preset: default  
 
 recognizer:
   import_preset: default
